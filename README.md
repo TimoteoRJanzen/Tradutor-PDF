@@ -26,8 +26,8 @@ Uma aplicação web para traduzir arquivos PDF do inglês para o português usan
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/TimoteoRJanzen/pdf-translator.git
-cd pdf-translator
+git clone https://github.com/TimoteoRJanzen/Tradutor-PDF.git
+cd Tradutor-PDF
 ```
 
 2. Instale as dependências:
