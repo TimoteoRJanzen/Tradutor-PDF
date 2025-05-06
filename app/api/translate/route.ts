@@ -1,73 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-import pdfParse from 'pdf-parse';
-import { translateText } from '../config';
-
-// Função para suprimir warnings específicos
-function suppressWarnings() {
-  const originalConsoleWarn = console.warn;
-  console.warn = function(...args) {
-    // Ignorar warnings específicos do pdf-parse
-    if (
-      args[0]?.includes('Invalid stream') ||
-      args[0]?.includes('Indexing all PDF objects') ||
-      args[0]?.includes('TT: undefined function')
-    ) {
-      return;
-    }
-    originalConsoleWarn.apply(console, args);
-  };
-}
-
-async function extractTextFromPDF(arrayBuffer: ArrayBuffer): Promise<TextElement[]> {
-  try {
-    // Suprimir warnings específicos
-    suppressWarnings();
-
-    // Converter ArrayBuffer para Buffer de forma segura
-    const buffer = Buffer.from(arrayBuffer);
-    
-    // Extrair texto do PDF
-    const data = await pdfParse(buffer);
-
-    const textElements: TextElement[] = [];
-    const lines = data.text.split('\n');
-    let y = 800; // Posição inicial Y
-    const font = 'Helvetica';
-    const color = { r: 0, g: 0, b: 0 };
-    const pageWidth = 595.28; // A4
-    const margin = 50;
-    const usableWidth = pageWidth - 2 * margin;
-    const minFontSize = 8;
-    const maxFontSize = 12;
-
-    for (const line of lines) {
-      if (line.trim()) {
-        // Ajustar o tamanho da fonte para caber na largura útil
-        let fontSize = maxFontSize;
-        let textWidth = line.length * (fontSize * 0.6); // Aproximação
-        while (textWidth > usableWidth && fontSize > minFontSize) {
-          fontSize -= 0.5;
-          textWidth = line.length * (fontSize * 0.6);
-        }
-        textElements.push({
-          text: line,
-          x: margin,
-          y,
-          fontSize,
-          font,
-          color
-        });
-        y -= fontSize * 1.5;
-      }
-    }
-
-    return textElements;
-  } catch (error) {
-    console.error('Erro ao extrair texto do PDF:', error);
-    throw error;
-  }
-}
+import fs from 'fs/promises';
+import path from 'path';
+import os from 'os';
+import { execFile } from 'child_process';
+import { promisify } from 'util';
+const execFileAsync = promisify(execFile);
 
 export async function POST(request: NextRequest) {
   try {
@@ -79,44 +16,75 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    // Extrair texto do PDF
+    // Salvar arquivo temporário e idioma alvo
+    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'translate-'));
+    const inputPath = path.join(tempDir, 'input.pdf');
+    const outputPath = path.join(tempDir, 'output.pdf');
     const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    const data = await pdfParse(buffer);
-    const originalText = data.text;
+    await fs.writeFile(inputPath, Buffer.from(arrayBuffer));
+    // idioma de destino (opcional, default PT-BR)
+    const targetLang = (formData.get('target_lang') as string) || 'PT-BR';
 
-    // Traduzir todo o texto de uma vez
-    const translatedText = await translateText(originalText);
-
-    // Criar novo PDF simples com o texto traduzido
-    const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage([595.28, 841.89]); // A4
-    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    const fontSize = 12;
-    const margin = 50;
-    const maxWidth = 595.28 - 2 * margin;
-    let y = 841.89 - margin;
-
-    // Quebrar o texto traduzido em linhas para caber na largura da página
-    const words = translatedText.split(/\s+/);
-    let line = '';
-    for (const word of words) {
-      const testLine = line ? line + ' ' + word : word;
-      const textWidth = font.widthOfTextAtSize(testLine, fontSize);
-      if (textWidth > maxWidth) {
-        page.drawText(line, { x: margin, y, size: fontSize, font, color: rgb(0,0,0) });
-        y -= fontSize * 1.5;
-        line = word;
-      } else {
-        line = testLine;
+    // Tentar executar o script Python com múltiplos comandos candidatos
+    const scriptPath = path.join(process.cwd(), 'scripts', 'translate_pdf.py');
+    const isWin = process.platform === 'win32';
+    // Fallback de comandos Python:
+    const candidates = isWin
+      ? [process.env.PYTHON_PATH, 'py', 'python']
+      : [process.env.PYTHON_PATH, 'python3', 'python'];
+    // Remove entradas vazias e duplicadas
+    const uniqueCandidates = Array.from(new Set(candidates.filter(Boolean as any))) as string[];
+    let executed = false;
+    for (const cmd of uniqueCandidates) {
+      // Montar argumentos: 'py' usa '-3', outros não
+      const baseArgs = cmd === 'py'
+        ? ['-3', scriptPath]
+        : [scriptPath];
+      // adiciona flags de input, output e idioma
+      const args = [
+        ...baseArgs,
+        '--input', inputPath,
+        '--output', outputPath,
+        '--target_lang', targetLang
+      ];
+      try {
+        await execFileAsync(cmd, args, { env: process.env });
+        executed = true;
+        break;
+      } catch (e: any) {
+        const stderr: string = e.stderr || '';
+        // Se comando não encontrado ou stub alias de Windows (Python não foi encontrado), tenta próximo
+        if (
+          e.code === 'ENOENT' ||
+          stderr.toLowerCase().includes('não foi encontrado') ||
+          stderr.toLowerCase().includes('store') ||
+          stderr.toLowerCase().includes('not recognized as an internal')
+        ) continue;
+        // Se faltar módulo Python, informar ao usuário
+        if (stderr.includes('ModuleNotFoundError')) {
+          return NextResponse.json(
+            { error: 'Dependência Python não instalada. Execute pip install -r requirements/python-requirements.txt para instalar pdfplumber, reportlab, deepl e PyMuPDF.' },
+            { status: 500 }
+          );
+        }
+        // Outro erro Python, repassa
+        throw e;
       }
     }
-    if (line) {
-      page.drawText(line, { x: margin, y, size: fontSize, font, color: rgb(0,0,0) });
+    if (!executed) {
+      return NextResponse.json(
+        { error: 'Python não encontrado. Instale Python 3 e adicione ao PATH ou defina PYTHON_PATH.' },
+        { status: 500 }
+      );
     }
 
-    const pdfBytes = await pdfDoc.save();
-    return new NextResponse(pdfBytes, {
+    // Ler PDF traduzido
+    const translatedBuffer = await fs.readFile(outputPath);
+
+    // Limpar temporários
+    await fs.rm(tempDir, { recursive: true, force: true });
+
+    return new NextResponse(translatedBuffer, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="traduzido.pdf"'

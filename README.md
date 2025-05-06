@@ -30,34 +30,21 @@ git clone https://github.com/TimoteoRJanzen/Tradutor-PDF.git
 cd Tradutor-PDF
 ```
 
-2. Instale as dependências:
+2. Instale as dependências JavaScript:
 ```bash
 npm install
 ```
 
-3. Crie um arquivo `.env.local` na raiz do projeto com sua chave da API do DeepL:
-```
-DEEPL_API_KEY=sua-chave-api-aqui
-```
+3. Instale as dependências Python:
 
-4. Inicie o servidor de desenvolvimento:
-```bash
-npm run dev
-```
+   No Linux/macOS:
+   ```bash
+   pip3 install -r requirements/python-requirements.txt
+   ```
 
-5. Acesse a aplicação em `http://localhost:3000`
+   No Windows:
+   ```powershell
+   py -3 -m pip install -r requirements/python-requirements.txt
+   ```
 
-## Como Usar
-
-1. Arraste e solte um arquivo PDF na área indicada ou clique para selecionar
-2. Clique em "Extrair Texto" para ver o conteúdo do PDF
-3. Clique em "Traduzir PDF" para traduzir o documento
-4. O PDF traduzido será baixado automaticamente
-
-## Contribuição
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
-
-## Licença
-
-Este projeto está sob a licença MIT.
+4. Crie um arquivo `.env.local`

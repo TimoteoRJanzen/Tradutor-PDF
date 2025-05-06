@@ -12,6 +12,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [translatedPdfUrl, setTranslatedPdfUrl] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
+  const [targetLang, setTargetLang] = useState<string>('PT-BR');
 
   const onDrop = (acceptedFiles: File[]) => {
     const selectedFile = acceptedFiles[0];
@@ -43,6 +44,7 @@ export default function Home() {
       
       const form = new FormData();
       form.append('pdf', file);
+      form.append('target_lang', targetLang);
       
       const res = await fetch('/api/translate', {
         method: 'POST',
@@ -50,7 +52,16 @@ export default function Home() {
       });
       
       if (!res.ok) {
-        throw new Error('Erro ao traduzir o PDF');
+        // Tenta obter mensagem de erro do servidor
+        let errorMessage = 'Erro ao traduzir o PDF';
+        try {
+          const errJson = await res.json();
+          errorMessage = errJson.error || errorMessage;
+        } catch {}
+        console.error('Erro na API:', errorMessage);
+        setError(errorMessage);
+        setLoading(false);
+        return;
       }
       
       const blob = await res.blob();
@@ -88,7 +99,7 @@ export default function Home() {
       
       <Card className="w-full max-w-2xl p-6 shadow-lg">
         <motion.div
-          {...getRootProps()}
+          {...(getRootProps() as any)}
           className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-300
             ${isDragActive ? 'border-blue-500 bg-blue-50 scale-105' : 'border-gray-300 hover:border-gray-400'}
             ${error ? 'border-red-500' : ''}`}
@@ -129,6 +140,19 @@ export default function Home() {
             </motion.p>
           )}
         </AnimatePresence>
+
+        <div className="mt-4 flex items-center space-x-2">
+          <label htmlFor="targetLang" className="text-sm font-medium">Idioma:</label>
+          <select
+            id="targetLang"
+            value={targetLang}
+            onChange={e => setTargetLang(e.target.value)}
+            className="border border-gray-300 rounded px-2 py-1 text-sm"
+          >
+            <option value="PT-BR">Português (Brasil)</option>
+            <option value="PT-PT">Português (Portugal)</option>
+          </select>
+        </div>
 
         <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
           <Button
