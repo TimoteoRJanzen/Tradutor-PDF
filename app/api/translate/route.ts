@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import os from 'os';
-import { execFile } from 'child_process';
+import { spawn } from 'child_process';
 import { promisify } from 'util';
-const execFileAsync = promisify(execFile);
 
 export async function POST(request: NextRequest) {
+  let logs: string[] = [];
   try {
     const formData = await request.formData();
     const file = formData.get('pdf') as File;
@@ -35,6 +35,7 @@ export async function POST(request: NextRequest) {
     // Remove entradas vazias e duplicadas
     const uniqueCandidates = Array.from(new Set(candidates.filter(Boolean as any))) as string[];
     let executed = false;
+
     for (const cmd of uniqueCandidates) {
       // Montar argumentos: 'py' usa '-3', outros não
       const baseArgs = cmd === 'py'
@@ -48,7 +49,33 @@ export async function POST(request: NextRequest) {
         '--target_lang', targetLang
       ];
       try {
-        await execFileAsync(cmd, args, { env: process.env });
+        const pythonProcess = spawn(cmd, args, { env: process.env });
+        
+        // Captura stdout e stderr
+        await new Promise<void>((resolve, reject) => {
+          pythonProcess.stdout.on('data', (data: Buffer) => {
+            const lines = data.toString().split('\n').filter(Boolean);
+            logs.push(...lines);
+          });
+          
+          pythonProcess.stderr.on('data', (data: Buffer) => {
+            const lines = data.toString().split('\n').filter(Boolean);
+            logs.push(...lines);
+          });
+          
+          pythonProcess.on('close', (code: number | null) => {
+            if (code === 0) {
+              resolve();
+            } else {
+              const err = new Error(`Process exited with code ${code}`);
+              (err as any).logs = logs;
+              reject(err);
+            }
+          });
+          
+          pythonProcess.on('error', reject);
+        });
+
         executed = true;
         break;
       } catch (e: any) {
@@ -84,18 +111,26 @@ export async function POST(request: NextRequest) {
     // Limpar temporários
     await fs.rm(tempDir, { recursive: true, force: true });
 
-    return new NextResponse(translatedBuffer, {
+    const response = new NextResponse(translatedBuffer, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="traduzido.pdf"'
       }
     });
-  } catch (error) {
+    
+    // Adiciona os logs como header (codificados em base64 para evitar problemas com caracteres especiais)
+    response.headers.set('X-Translation-Logs', Buffer.from(JSON.stringify(logs)).toString('base64'));
+    
+    return response;
+
+  } catch (error: any) {
     console.error('Erro ao processar o PDF:', error);
-    return NextResponse.json(
-      { error: 'Erro ao processar o PDF: ' + (error instanceof Error ? error.message : String(error)) },
-      { status: 500 }
-    );
+    const message = error instanceof Error ? error.message : String(error);
+    const responseBody: any = { error: 'Erro ao processar o PDF: ' + message };
+    if (logs.length > 0) {
+      responseBody.logs = logs;
+    }
+    return NextResponse.json(responseBody, { status: 500 });
   }
 }
 

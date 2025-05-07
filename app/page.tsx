@@ -13,6 +13,7 @@ export default function Home() {
   const [translatedPdfUrl, setTranslatedPdfUrl] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
   const [targetLang, setTargetLang] = useState<string>('PT-BR');
+  const [logs, setLogs] = useState<string[]>([]);
 
   const onDrop = (acceptedFiles: File[]) => {
     const selectedFile = acceptedFiles[0];
@@ -41,6 +42,7 @@ export default function Home() {
       setError(null);
       setProgress(0);
       setTranslatedPdfUrl(null);
+      setLogs([]);
       
       const form = new FormData();
       form.append('pdf', file);
@@ -52,16 +54,32 @@ export default function Home() {
       });
       
       if (!res.ok) {
-        // Tenta obter mensagem de erro do servidor
+        // Tenta obter mensagem de erro e logs do servidor
         let errorMessage = 'Erro ao traduzir o PDF';
         try {
           const errJson = await res.json();
           errorMessage = errJson.error || errorMessage;
-        } catch {}
+          if (Array.isArray(errJson.logs)) {
+            setLogs(errJson.logs);
+          }
+        } catch (e) {
+          console.error('Falha ao ler resposta de erro:', e);
+        }
         console.error('Erro na API:', errorMessage);
         setError(errorMessage);
         setLoading(false);
         return;
+      }
+      
+      // Extrai logs do header
+      const logsHeader = res.headers.get('X-Translation-Logs');
+      if (logsHeader) {
+        try {
+          const decodedLogs = JSON.parse(Buffer.from(logsHeader, 'base64').toString());
+          setLogs(decodedLogs);
+        } catch (e) {
+          console.error('Erro ao decodificar logs:', e);
+        }
       }
       
       const blob = await res.blob();
@@ -213,6 +231,27 @@ export default function Home() {
             </div>
           </div>
         )}
+
+        {/* Área de logs */}
+        <AnimatePresence>
+          {logs.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mt-6 border rounded-lg p-4 bg-gray-50"
+            >
+              <h3 className="text-sm font-medium mb-2 text-gray-700">Logs da Tradução:</h3>
+              <div className="max-h-60 overflow-y-auto text-sm font-mono">
+                {logs.map((log, index) => (
+                  <div key={index} className="text-gray-600 whitespace-pre-wrap">
+                    {log}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Card>
     </div>
   );

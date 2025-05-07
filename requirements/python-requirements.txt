@@ -1,4 +1,6 @@
 pdfplumber
 reportlab
 deepl
-PyMuPDF 
+PyMuPDF
+requests
+Pillow 
