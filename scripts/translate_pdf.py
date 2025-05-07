@@ -67,6 +67,19 @@ def main():
     font_registry = {}
     # Mapear nomes de fontes customizadas para seus arquivos
     file_registry = {}
+    # Mapear fontes locais em ./fonts
+    local_fonts_dir = os.path.join(os.getcwd(), 'fonts')
+    local_fonts_map = {}
+    if os.path.isdir(local_fonts_dir):
+        for fname in os.listdir(local_fonts_dir):
+            if fname.lower().endswith(('.ttf', '.otf', '.ttc')):
+                reg_name = os.path.splitext(fname)[0].lower()
+                path = os.path.join(local_fonts_dir, fname)
+                local_fonts_map[reg_name] = path
+                file_registry[reg_name] = path
+                logger.info(f"Fonte local disponível: '{reg_name}' em '{path}'")
+    else:
+        local_fonts_map = {}
 
     # Abre o documento original e cria novo documento vazio
     doc = fitz.open(args.input)
@@ -135,7 +148,41 @@ def main():
                     logger.info(f"Fonte embutida '{ps_name}' mapeada para uso por página")
         except Exception as e:
             logger.debug(f"Não é fonte embutida ou falhou extração de '{ps_name}': {e}")
-        # 2) Se não registrado, tentar match exato ou fuzzy no Google Fonts
+        # 2) Se não registrado, tentar match em fontes locais (exato + fuzzy)
+        if not fonte_registrada:
+            # 2a) PS suffix PSMT → mapear para Regular local
+            if ps_name.lower().endswith('psmt'):
+                base = re.sub(r'psmt$', '', ps_name, flags=re.IGNORECASE)
+                base_words = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', base)
+                key = f"{base_words.strip().lower()} regular"
+                if key in local_fonts_map:
+                    font_path = local_fonts_map[key]
+                    file_registry[ps_name] = font_path
+                    font_registry[ps_name] = ps_name
+                    fonte_registrada = True
+                    logger.info(f"Fonte local PSMT '{key}' mapeada para PS '{ps_name}' via '{font_path}'")
+            if not fonte_registrada:
+                normalized_ps = re.sub(r'[^A-Za-z]', '', ps_name).lower()
+                local_keys = list(local_fonts_map.keys())
+                # Match exato por substring
+                matches = [name for name in local_keys if name in normalized_ps]
+                if matches:
+                    chosen = max(matches, key=len)
+                    font_path = local_fonts_map[chosen]
+                    file_registry[ps_name] = font_path
+                    font_registry[ps_name] = ps_name
+                    fonte_registrada = True
+                    logger.info(f"Fonte local exata '{chosen}' mapeada para PS '{ps_name}' via '{font_path}'")
+                else:
+                    similar = difflib.get_close_matches(normalized_ps, local_keys, n=1, cutoff=0.8)
+                    if similar:
+                        chosen = similar[0]
+                        font_path = local_fonts_map[chosen]
+                        file_registry[ps_name] = font_path
+                        font_registry[ps_name] = ps_name
+                        fonte_registrada = True
+                        logger.info(f"Fonte local fuzzy '{chosen}' mapeada para PS '{ps_name}' via '{font_path}'")
+        # 3) Se não registrado, tentar match exato ou fuzzy no Google Fonts
         if not fonte_registrada and google_fonts_lower:
             # Extrair a parte após '+' no PS name (ex: 'OpenSans-Bold')
             name_part = ps_name.split('+')[-1]
@@ -203,7 +250,7 @@ def main():
                     logger.info(f"Fonte PS '{ps_name}' mapeada para variante '{variant_name}'")
                 else:
                     logger.warning(f"Variante '{variant_name}' não disponível, fallback posterior")
-        # 3) fallback para Roboto Condensed ou Times
+        # 4) fallback para Roboto Condensed ou Times
         if not fonte_registrada:
             if 'Bold' in ps_name:
                 font_registry[ps_name] = font_registry['default_bold']

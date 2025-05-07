@@ -1880,3 +1880,500 @@ TypeError: unsupported operand type(s) for +: 'NoneType' and 'bool'
 2025-05-07 11:57:19,712 - Página 1: fallback full-page como imagem
 2025-05-07 11:57:19,714 - Página 1: inserindo 7 blocos de texto
 2025-05-07 11:57:22,450 - Página 1 processada com sucesso: 7 textos
+2025-05-07 15:54:03,490 - Carregando variáveis de ambiente (.env, .env.local e variáveis de sistema)
+2025-05-07 15:54:03,492 - DeepL API key presente: True
+2025-05-07 15:54:03,494 - Fonte local disponível: 'arial' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\arial.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'arialbd' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\arialbd.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'arialbi' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\arialbi.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'ariali' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\ariali.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'arialn' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\ARIALN.TTF'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'arialnb' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\ARIALNB.TTF'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'arialnbi' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\ARIALNBI.TTF'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'arialni' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\ARIALNI.TTF'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'ariblk' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\ariblk.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'calibri' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\calibri.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'calibrib' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\calibrib.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'calibrii' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\calibrii.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'calibril' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\calibril.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'calibrili' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\calibrili.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'calibriz' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\calibriz.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'cambria' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\cambria.ttc'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'cambriab' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\cambriab.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'cambriai' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\cambriai.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'cambriaz' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\cambriaz.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'segoeui' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\segoeui.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'segoeuib' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\segoeuib.ttf'
+2025-05-07 15:54:03,494 - Fonte local disponível: 'segoeuii' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\segoeuii.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'segoeuil' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\segoeuil.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'segoeuisl' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\segoeuisl.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'segoeuiz' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\segoeuiz.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'seguibl' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\seguibl.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'seguibli' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\seguibli.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'seguili' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\seguili.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'seguisb' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\seguisb.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'seguisbi' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\seguisbi.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'seguisli' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\seguisli.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'tahoma' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\tahoma.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'tahomabd' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\tahomabd.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'times' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\times.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'timesbd' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\timesbd.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'timesbi' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\timesbi.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'timesi' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\timesi.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'verdana' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\verdana.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'verdanab' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\verdanab.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'verdanai' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\verdanai.ttf'
+2025-05-07 15:54:03,495 - Fonte local disponível: 'verdanaz' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\verdanaz.ttf'
+2025-05-07 15:54:04,121 - Usando API do Google Fonts para Roboto Condensed
+2025-05-07 15:54:04,294 - Roboto Condensed estilo 'RobotoCondensed' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_l2cpoc84\RobotoCondensed.ttf'
+2025-05-07 15:54:04,459 - Roboto Condensed estilo 'RobotoCondensed-Bold' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_l2cpoc84\RobotoCondensed-Bold.ttf'
+2025-05-07 15:54:04,628 - Roboto Condensed estilo 'RobotoCondensed-Italic' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_l2cpoc84\RobotoCondensed-Italic.ttf'
+2025-05-07 15:54:04,630 - Fallback Roboto Condensed 'RobotoCondensed' mapeado para uso por página
+2025-05-07 15:54:04,630 - Fallback Roboto Condensed 'RobotoCondensed-Bold' mapeado para uso por página
+2025-05-07 15:54:04,630 - Fallback Roboto Condensed 'RobotoCondensed-Italic' mapeado para uso por página
+2025-05-07 15:54:04,630 - Google Fonts API key presente: True
+2025-05-07 15:54:05,203 - Famílias do Google Fonts carregadas: 1696
+2025-05-07 15:54:05,203 - Famílias do Google Fonts para matching (case-insensitive): 1696
+2025-05-07 15:54:05,203 - Processando fonte PS 'TimesNewRomanPS-BoldMT', embutida=TT0
+2025-05-07 15:54:05,204 - Fonte local 'times' mapeada para PS 'TimesNewRomanPS-BoldMT'
+2025-05-07 15:54:05,204 - Processando fonte PS 'TimesNewRomanPSMT', embutida=TT1
+2025-05-07 15:54:05,204 - Fonte local 'times' mapeada para PS 'TimesNewRomanPSMT'
+2025-05-07 15:54:05,204 - Processando fonte PS 'FEYKZO+Calibri', embutida=TT2
+2025-05-07 15:54:05,206 - Fonte local 'calibri' mapeada para PS 'FEYKZO+Calibri'
+2025-05-07 15:54:05,206 - Processando página 1/1
+2025-05-07 15:54:05,484 - Página 1: inseriu imagem block bbox=(234.00001525878906, 72.00000762939453, 378.0, 175.20001220703125)
+2025-05-07 15:54:05,485 - Página 1: inserindo 14 blocos de texto
+2025-05-07 15:54:11,086 - Página 1 processada com sucesso: 14 textos
+2025-05-07 16:28:32,559 - Carregando variáveis de ambiente (.env, .env.local e variáveis de sistema)
+2025-05-07 16:28:32,560 - DeepL API key presente: True
+2025-05-07 16:28:32,562 - Fonte local disponível: 'arial bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold Italic.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'arial bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'arial italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Italic.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'arial narrow bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold Italic.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'arial narrow bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'arial narrow italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Italic.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'arial narrow regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Regular.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'arial regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Regular.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'calibri bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold Italic.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'calibri bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'calibri italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Italic.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'calibri light italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light Italic.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'calibri light' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'calibri regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Regular.ttf'
+2025-05-07 16:28:32,562 - Fonte local disponível: 'cambria bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold Italic.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'cambria bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'cambria italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Italic.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'cambria math' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Math.ttc'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'segoe ui bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold Italic.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'segoe ui bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'segoe ui italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Italic.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'segoe ui regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Regular.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'tahoma bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Bold.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'tahoma regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Regular.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'times new roman bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold Italic.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'times new roman bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'times new roman italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Italic.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'times new roman regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Regular.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'verdana bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold Italic.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'verdana bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'verdana italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Italic.ttf'
+2025-05-07 16:28:32,563 - Fonte local disponível: 'verdana regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Regular.ttf'
+2025-05-07 16:28:33,244 - Usando API do Google Fonts para Roboto Condensed
+2025-05-07 16:28:33,395 - Roboto Condensed estilo 'RobotoCondensed' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_tc9hsqa2\RobotoCondensed.ttf'
+2025-05-07 16:28:33,543 - Roboto Condensed estilo 'RobotoCondensed-Bold' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_tc9hsqa2\RobotoCondensed-Bold.ttf'
+2025-05-07 16:28:33,704 - Roboto Condensed estilo 'RobotoCondensed-Italic' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_tc9hsqa2\RobotoCondensed-Italic.ttf'
+2025-05-07 16:28:33,705 - Fallback Roboto Condensed 'RobotoCondensed' mapeado para uso por página
+2025-05-07 16:28:33,706 - Fallback Roboto Condensed 'RobotoCondensed-Bold' mapeado para uso por página
+2025-05-07 16:28:33,706 - Fallback Roboto Condensed 'RobotoCondensed-Italic' mapeado para uso por página
+2025-05-07 16:28:33,706 - Google Fonts API key presente: True
+2025-05-07 16:28:34,235 - Famílias do Google Fonts carregadas: 1696
+2025-05-07 16:28:34,235 - Famílias do Google Fonts para matching (case-insensitive): 1696
+2025-05-07 16:28:34,235 - Processando fonte PS 'TimesNewRomanPS-BoldMT', embutida=TT0
+2025-05-07 16:28:34,236 - Buscando similar para 'times new roman ps' no Google Fonts (PS 'TimesNewRomanPS-BoldMT')
+2025-05-07 16:28:34,252 - Fuzzy match encontrado: 'Gideon Roman' para PS 'TimesNewRomanPS-BoldMT'
+2025-05-07 16:28:34,403 - Baixada variante 'Regular' da família 'Gideon Roman' como 'GideonRoman'
+2025-05-07 16:28:34,403 - Variante 'GideonRoman-Bold' não disponível, fallback posterior
+2025-05-07 16:28:34,403 - Fallback: fonte para PS 'TimesNewRomanPS-BoldMT' definida como 'RobotoCondensed-Bold'
+2025-05-07 16:28:34,403 - Processando fonte PS 'TimesNewRomanPSMT', embutida=TT1
+2025-05-07 16:28:34,404 - Buscando similar para 'times new roman psmt' no Google Fonts (PS 'TimesNewRomanPSMT')
+2025-05-07 16:28:34,419 - Fuzzy match encontrado: 'Gideon Roman' para PS 'TimesNewRomanPSMT'
+2025-05-07 16:28:34,419 - Fonte PS 'TimesNewRomanPSMT' mapeada para variante 'GideonRoman'
+2025-05-07 16:28:34,419 - Processando fonte PS 'FEYKZO+Calibri', embutida=TT2
+2025-05-07 16:28:34,422 - Buscando similar para 'calibri' no Google Fonts (PS 'FEYKZO+Calibri')
+2025-05-07 16:28:34,427 - Fuzzy match encontrado: 'Cairo' para PS 'FEYKZO+Calibri'
+2025-05-07 16:28:34,567 - Baixada variante 'Regular' da família 'Cairo' como 'Cairo'
+2025-05-07 16:28:34,708 - Baixada variante '-Bold' da família 'Cairo' como 'Cairo-Bold'
+2025-05-07 16:28:34,708 - Fonte PS 'FEYKZO+Calibri' mapeada para variante 'Cairo'
+2025-05-07 16:28:34,708 - Processando página 1/1
+2025-05-07 16:28:34,804 - Página 1: inseriu imagem block bbox=(234.00001525878906, 72.00000762939453, 378.0, 175.20001220703125)
+2025-05-07 16:28:34,805 - Página 1: inserindo 14 blocos de texto
+2025-05-07 16:28:40,887 - Página 1 processada com sucesso: 14 textos
+2025-05-07 16:33:57,721 - Carregando variáveis de ambiente (.env, .env.local e variáveis de sistema)
+2025-05-07 16:33:57,722 - DeepL API key presente: True
+2025-05-07 16:33:57,724 - Fonte local disponível: 'arial bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold Italic.ttf'
+2025-05-07 16:33:57,724 - Fonte local disponível: 'arial bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold.ttf'
+2025-05-07 16:33:57,724 - Fonte local disponível: 'arial italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Italic.ttf'
+2025-05-07 16:33:57,724 - Fonte local disponível: 'arial narrow bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'arial narrow bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'arial narrow italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'arial narrow regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Regular.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'arial regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Regular.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'calibri bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'calibri bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'calibri italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'calibri light italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'calibri light' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'calibri regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Regular.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'cambria bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'cambria bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'cambria italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'cambria math' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Math.ttc'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'segoe ui bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'segoe ui bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'segoe ui italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'segoe ui regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Regular.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'tahoma bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Bold.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'tahoma regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Regular.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'times new roman bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'times new roman bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'times new roman italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'times new roman regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Regular.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'verdana bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold Italic.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'verdana bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold.ttf'
+2025-05-07 16:33:57,725 - Fonte local disponível: 'verdana italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Italic.ttf'
+2025-05-07 16:33:57,726 - Fonte local disponível: 'verdana regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Regular.ttf'
+2025-05-07 16:33:58,376 - Usando API do Google Fonts para Roboto Condensed
+2025-05-07 16:33:58,551 - Roboto Condensed estilo 'RobotoCondensed' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_bzbr25mr\RobotoCondensed.ttf'
+2025-05-07 16:33:58,718 - Roboto Condensed estilo 'RobotoCondensed-Bold' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_bzbr25mr\RobotoCondensed-Bold.ttf'
+2025-05-07 16:33:58,865 - Roboto Condensed estilo 'RobotoCondensed-Italic' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_bzbr25mr\RobotoCondensed-Italic.ttf'
+2025-05-07 16:33:58,866 - Fallback Roboto Condensed 'RobotoCondensed' mapeado para uso por página
+2025-05-07 16:33:58,866 - Fallback Roboto Condensed 'RobotoCondensed-Bold' mapeado para uso por página
+2025-05-07 16:33:58,866 - Fallback Roboto Condensed 'RobotoCondensed-Italic' mapeado para uso por página
+2025-05-07 16:33:58,866 - Google Fonts API key presente: True
+2025-05-07 16:33:59,453 - Famílias do Google Fonts carregadas: 1696
+2025-05-07 16:33:59,453 - Famílias do Google Fonts para matching (case-insensitive): 1696
+2025-05-07 16:33:59,453 - Processando fonte PS 'TimesNewRomanPS-BoldMT', embutida=TT0
+2025-05-07 16:33:59,454 - Fonte local fuzzy 'times new roman bold' mapeada para PS 'TimesNewRomanPS-BoldMT'
+2025-05-07 16:33:59,454 - Processando fonte PS 'TimesNewRomanPSMT', embutida=TT1
+2025-05-07 16:33:59,454 - Fonte local fuzzy 'times new roman italic' mapeada para PS 'TimesNewRomanPSMT'
+2025-05-07 16:33:59,454 - Processando fonte PS 'FEYKZO+Calibri', embutida=TT2
+2025-05-07 16:33:59,455 - Buscando similar para 'calibri' no Google Fonts (PS 'FEYKZO+Calibri')
+2025-05-07 16:33:59,460 - Fuzzy match encontrado: 'Cairo' para PS 'FEYKZO+Calibri'
+2025-05-07 16:33:59,611 - Baixada variante 'Regular' da família 'Cairo' como 'Cairo'
+2025-05-07 16:33:59,748 - Baixada variante '-Bold' da família 'Cairo' como 'Cairo-Bold'
+2025-05-07 16:33:59,749 - Fonte PS 'FEYKZO+Calibri' mapeada para variante 'Cairo'
+2025-05-07 16:33:59,749 - Processando página 1/1
+2025-05-07 16:33:59,793 - Página 1: inseriu imagem block bbox=(234.00001525878906, 72.00000762939453, 378.0, 175.20001220703125)
+2025-05-07 16:33:59,794 - Página 1: inserindo 14 blocos de texto
+2025-05-07 16:34:05,857 - Página 1 processada com sucesso: 14 textos
+2025-05-07 16:37:19,106 - Carregando variáveis de ambiente (.env, .env.local e variáveis de sistema)
+2025-05-07 16:37:19,107 - DeepL API key presente: True
+2025-05-07 16:37:19,109 - Fonte local disponível: 'arial bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold Italic.ttf'
+2025-05-07 16:37:19,109 - Fonte local disponível: 'arial bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold.ttf'
+2025-05-07 16:37:19,109 - Fonte local disponível: 'arial italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Italic.ttf'
+2025-05-07 16:37:19,109 - Fonte local disponível: 'arial narrow bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold Italic.ttf'
+2025-05-07 16:37:19,109 - Fonte local disponível: 'arial narrow bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold.ttf'
+2025-05-07 16:37:19,109 - Fonte local disponível: 'arial narrow italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'arial narrow regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Regular.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'arial regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Regular.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'calibri bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'calibri bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'calibri italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'calibri light italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'calibri light' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'calibri regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Regular.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'cambria bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'cambria bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'cambria italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'cambria math' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Math.ttc'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'segoe ui bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'segoe ui bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'segoe ui italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'segoe ui regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Regular.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'tahoma bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Bold.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'tahoma regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Regular.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'times new roman bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'times new roman bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'times new roman italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'times new roman regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Regular.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'verdana bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'verdana bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'verdana italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Italic.ttf'
+2025-05-07 16:37:19,110 - Fonte local disponível: 'verdana regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Regular.ttf'
+2025-05-07 16:37:19,673 - Usando API do Google Fonts para Roboto Condensed
+2025-05-07 16:37:19,842 - Roboto Condensed estilo 'RobotoCondensed' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_uo_ur1db\RobotoCondensed.ttf'
+2025-05-07 16:37:20,015 - Roboto Condensed estilo 'RobotoCondensed-Bold' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_uo_ur1db\RobotoCondensed-Bold.ttf'
+2025-05-07 16:37:20,182 - Roboto Condensed estilo 'RobotoCondensed-Italic' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_uo_ur1db\RobotoCondensed-Italic.ttf'
+2025-05-07 16:37:20,184 - Fallback Roboto Condensed 'RobotoCondensed' mapeado para uso por página
+2025-05-07 16:37:20,184 - Fallback Roboto Condensed 'RobotoCondensed-Bold' mapeado para uso por página
+2025-05-07 16:37:20,184 - Fallback Roboto Condensed 'RobotoCondensed-Italic' mapeado para uso por página
+2025-05-07 16:37:20,184 - Google Fonts API key presente: True
+2025-05-07 16:37:20,712 - Famílias do Google Fonts carregadas: 1696
+2025-05-07 16:37:20,712 - Famílias do Google Fonts para matching (case-insensitive): 1696
+2025-05-07 16:37:20,712 - Processando fonte PS 'TimesNewRomanPS-BoldMT', embutida=TT0
+2025-05-07 16:37:20,713 - Fonte local fuzzy 'times new roman bold' mapeada para PS 'TimesNewRomanPS-BoldMT'
+2025-05-07 16:37:20,713 - Processando fonte PS 'TimesNewRomanPSMT', embutida=TT1
+2025-05-07 16:37:20,713 - Buscando similar para 'times new roman psmt' no Google Fonts (PS 'TimesNewRomanPSMT')
+2025-05-07 16:37:20,728 - Fuzzy match encontrado: 'Gideon Roman' para PS 'TimesNewRomanPSMT'
+2025-05-07 16:37:20,888 - Baixada variante 'Regular' da família 'Gideon Roman' como 'GideonRoman'
+2025-05-07 16:37:20,889 - Fonte PS 'TimesNewRomanPSMT' mapeada para variante 'GideonRoman'
+2025-05-07 16:37:20,889 - Processando fonte PS 'FEYKZO+Calibri', embutida=TT2
+2025-05-07 16:37:20,889 - Buscando similar para 'calibri' no Google Fonts (PS 'FEYKZO+Calibri')
+2025-05-07 16:37:20,894 - Fuzzy match encontrado: 'Cairo' para PS 'FEYKZO+Calibri'
+2025-05-07 16:37:21,038 - Baixada variante 'Regular' da família 'Cairo' como 'Cairo'
+2025-05-07 16:37:21,179 - Baixada variante '-Bold' da família 'Cairo' como 'Cairo-Bold'
+2025-05-07 16:37:21,179 - Fonte PS 'FEYKZO+Calibri' mapeada para variante 'Cairo'
+2025-05-07 16:37:21,179 - Processando página 1/1
+2025-05-07 16:37:21,228 - Página 1: inseriu imagem block bbox=(234.00001525878906, 72.00000762939453, 378.0, 175.20001220703125)
+2025-05-07 16:37:21,229 - Página 1: inserindo 14 blocos de texto
+2025-05-07 16:37:26,283 - Página 1 processada com sucesso: 14 textos
+2025-05-07 16:42:12,436 - Carregando variáveis de ambiente (.env, .env.local e variáveis de sistema)
+2025-05-07 16:42:12,437 - DeepL API key presente: True
+2025-05-07 16:42:12,439 - Fonte local disponível: 'arial bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold Italic.ttf'
+2025-05-07 16:42:12,439 - Fonte local disponível: 'arial bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold.ttf'
+2025-05-07 16:42:12,439 - Fonte local disponível: 'arial italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Italic.ttf'
+2025-05-07 16:42:12,439 - Fonte local disponível: 'arial narrow bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'arial narrow bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'arial narrow italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'arial narrow regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Regular.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'arial regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Regular.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'calibri bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'calibri bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'calibri italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'calibri light italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'calibri light' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'calibri regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Regular.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'cambria bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'cambria bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'cambria italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'cambria math' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Math.ttc'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'segoe ui bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'segoe ui bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'segoe ui italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'segoe ui regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Regular.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'tahoma bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Bold.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'tahoma regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Regular.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'times new roman bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'times new roman bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'times new roman italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'times new roman regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Regular.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'verdana bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'verdana bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'verdana italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Italic.ttf'
+2025-05-07 16:42:12,440 - Fonte local disponível: 'verdana regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Regular.ttf'
+2025-05-07 16:42:12,856 - Usando API do Google Fonts para Roboto Condensed
+2025-05-07 16:42:13,001 - Roboto Condensed estilo 'RobotoCondensed' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_7_rvv08u\RobotoCondensed.ttf'
+2025-05-07 16:42:13,149 - Roboto Condensed estilo 'RobotoCondensed-Bold' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_7_rvv08u\RobotoCondensed-Bold.ttf'
+2025-05-07 16:42:13,294 - Roboto Condensed estilo 'RobotoCondensed-Italic' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_7_rvv08u\RobotoCondensed-Italic.ttf'
+2025-05-07 16:42:13,295 - Fallback Roboto Condensed 'RobotoCondensed' mapeado para uso por página
+2025-05-07 16:42:13,295 - Fallback Roboto Condensed 'RobotoCondensed-Bold' mapeado para uso por página
+2025-05-07 16:42:13,296 - Fallback Roboto Condensed 'RobotoCondensed-Italic' mapeado para uso por página
+2025-05-07 16:42:13,296 - Google Fonts API key presente: True
+2025-05-07 16:42:13,755 - Famílias do Google Fonts carregadas: 1696
+2025-05-07 16:42:13,755 - Famílias do Google Fonts para matching (case-insensitive): 1696
+2025-05-07 16:42:13,755 - Processando fonte PS 'TimesNewRomanPS-BoldMT', embutida=TT0
+2025-05-07 16:42:13,755 - Fonte local fuzzy 'times new roman bold' mapeada para PS 'TimesNewRomanPS-BoldMT' via 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold.ttf'
+2025-05-07 16:42:13,756 - Processando fonte PS 'TimesNewRomanPSMT', embutida=TT1
+2025-05-07 16:42:13,756 - Buscando similar para 'times new roman psmt' no Google Fonts (PS 'TimesNewRomanPSMT')
+2025-05-07 16:42:13,770 - Fuzzy match encontrado: 'Gideon Roman' para PS 'TimesNewRomanPSMT'
+2025-05-07 16:42:13,923 - Baixada variante 'Regular' da família 'Gideon Roman' como 'GideonRoman'
+2025-05-07 16:42:13,923 - Fonte PS 'TimesNewRomanPSMT' mapeada para variante 'GideonRoman'
+2025-05-07 16:42:13,923 - Processando fonte PS 'FEYKZO+Calibri', embutida=TT2
+2025-05-07 16:42:13,924 - Buscando similar para 'calibri' no Google Fonts (PS 'FEYKZO+Calibri')
+2025-05-07 16:42:13,929 - Fuzzy match encontrado: 'Cairo' para PS 'FEYKZO+Calibri'
+2025-05-07 16:42:14,064 - Baixada variante 'Regular' da família 'Cairo' como 'Cairo'
+2025-05-07 16:42:14,226 - Baixada variante '-Bold' da família 'Cairo' como 'Cairo-Bold'
+2025-05-07 16:42:14,226 - Fonte PS 'FEYKZO+Calibri' mapeada para variante 'Cairo'
+2025-05-07 16:42:14,226 - Processando página 1/1
+2025-05-07 16:42:14,303 - Página 1: inseriu imagem block bbox=(234.00001525878906, 72.00000762939453, 378.0, 175.20001220703125)
+2025-05-07 16:42:14,304 - Página 1: inserindo 14 blocos de texto
+2025-05-07 16:42:19,275 - Página 1 processada com sucesso: 14 textos
+2025-05-07 16:53:45,610 - Carregando variáveis de ambiente (.env, .env.local e variáveis de sistema)
+2025-05-07 16:53:45,611 - DeepL API key presente: True
+2025-05-07 16:53:45,613 - Fonte local disponível: 'arial bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold Italic.ttf'
+2025-05-07 16:53:45,613 - Fonte local disponível: 'arial bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'arial italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'arial narrow bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'arial narrow bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'arial narrow italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'arial narrow regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Regular.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'arial regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Regular.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'calibri bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'calibri bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'calibri italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'calibri light italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'calibri light' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'calibri regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Regular.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'cambria bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'cambria bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'cambria italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'cambria math' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Math.ttc'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'segoe ui bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'segoe ui bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'segoe ui italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'segoe ui regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Regular.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'tahoma bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Bold.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'tahoma regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Regular.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'times new roman bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'times new roman bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'times new roman italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'times new roman regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Regular.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'verdana bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold Italic.ttf'
+2025-05-07 16:53:45,614 - Fonte local disponível: 'verdana bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold.ttf'
+2025-05-07 16:53:45,615 - Fonte local disponível: 'verdana italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Italic.ttf'
+2025-05-07 16:53:45,615 - Fonte local disponível: 'verdana regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Regular.ttf'
+2025-05-07 16:53:46,138 - Usando API do Google Fonts para Roboto Condensed
+2025-05-07 16:53:46,308 - Roboto Condensed estilo 'RobotoCondensed' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_fhhdw1jl\RobotoCondensed.ttf'
+2025-05-07 16:53:46,468 - Roboto Condensed estilo 'RobotoCondensed-Bold' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_fhhdw1jl\RobotoCondensed-Bold.ttf'
+2025-05-07 16:53:46,622 - Roboto Condensed estilo 'RobotoCondensed-Italic' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_fhhdw1jl\RobotoCondensed-Italic.ttf'
+2025-05-07 16:53:46,623 - Fallback Roboto Condensed 'RobotoCondensed' mapeado para uso por página
+2025-05-07 16:53:46,624 - Fallback Roboto Condensed 'RobotoCondensed-Bold' mapeado para uso por página
+2025-05-07 16:53:46,624 - Fallback Roboto Condensed 'RobotoCondensed-Italic' mapeado para uso por página
+2025-05-07 16:53:46,624 - Google Fonts API key presente: True
+2025-05-07 16:53:47,037 - Famílias do Google Fonts carregadas: 1696
+2025-05-07 16:53:47,037 - Famílias do Google Fonts para matching (case-insensitive): 1696
+2025-05-07 16:53:47,037 - Processando fonte PS 'TimesNewRomanPS-BoldMT', embutida=TT0
+2025-05-07 16:53:47,038 - Fonte local fuzzy 'times new roman bold' mapeada para PS 'TimesNewRomanPS-BoldMT' via 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold.ttf'
+2025-05-07 16:53:47,038 - Processando fonte PS 'TimesNewRomanPSMT', embutida=TT1
+2025-05-07 16:53:47,038 - Fonte local PSMT 'times new roman regular' mapeada para PS 'TimesNewRomanPSMT' via 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Regular.ttf'
+2025-05-07 16:53:47,038 - Processando fonte PS 'FEYKZO+Calibri', embutida=TT2
+2025-05-07 16:53:47,039 - Buscando similar para 'calibri' no Google Fonts (PS 'FEYKZO+Calibri')
+2025-05-07 16:53:47,044 - Fuzzy match encontrado: 'Cairo' para PS 'FEYKZO+Calibri'
+2025-05-07 16:53:47,182 - Baixada variante 'Regular' da família 'Cairo' como 'Cairo'
+2025-05-07 16:53:47,341 - Baixada variante '-Bold' da família 'Cairo' como 'Cairo-Bold'
+2025-05-07 16:53:47,341 - Fonte PS 'FEYKZO+Calibri' mapeada para variante 'Cairo'
+2025-05-07 16:53:47,341 - Processando página 1/1
+2025-05-07 16:53:47,405 - Página 1: inseriu imagem block bbox=(234.00001525878906, 72.00000762939453, 378.0, 175.20001220703125)
+2025-05-07 16:53:47,406 - Página 1: inserindo 14 blocos de texto
+2025-05-07 16:53:52,502 - Página 1 processada com sucesso: 14 textos
+2025-05-07 16:54:36,102 - Carregando variáveis de ambiente (.env, .env.local e variáveis de sistema)
+2025-05-07 16:54:36,103 - DeepL API key presente: True
+2025-05-07 16:54:36,108 - Fonte local disponível: 'arial bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold Italic.ttf'
+2025-05-07 16:54:36,108 - Fonte local disponível: 'arial bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold.ttf'
+2025-05-07 16:54:36,108 - Fonte local disponível: 'arial italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Italic.ttf'
+2025-05-07 16:54:36,108 - Fonte local disponível: 'arial narrow bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold Italic.ttf'
+2025-05-07 16:54:36,108 - Fonte local disponível: 'arial narrow bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold.ttf'
+2025-05-07 16:54:36,108 - Fonte local disponível: 'arial narrow italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Italic.ttf'
+2025-05-07 16:54:36,108 - Fonte local disponível: 'arial narrow regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Regular.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'arial regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Regular.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'calibri bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'calibri bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'calibri italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'calibri light italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'calibri light' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'calibri regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Regular.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'cambria bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'cambria bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'cambria italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'cambria math' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Math.ttc'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'segoe ui bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'segoe ui bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'segoe ui italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'segoe ui regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Regular.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'tahoma bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Bold.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'tahoma regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Regular.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'times new roman bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'times new roman bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'times new roman italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'times new roman regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Regular.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'verdana bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'verdana bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'verdana italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Italic.ttf'
+2025-05-07 16:54:36,109 - Fonte local disponível: 'verdana regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Regular.ttf'
+2025-05-07 16:54:36,660 - Usando API do Google Fonts para Roboto Condensed
+2025-05-07 16:54:36,807 - Roboto Condensed estilo 'RobotoCondensed' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_ss7slk4f\RobotoCondensed.ttf'
+2025-05-07 16:54:36,958 - Roboto Condensed estilo 'RobotoCondensed-Bold' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_ss7slk4f\RobotoCondensed-Bold.ttf'
+2025-05-07 16:54:37,130 - Roboto Condensed estilo 'RobotoCondensed-Italic' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_ss7slk4f\RobotoCondensed-Italic.ttf'
+2025-05-07 16:54:37,131 - Fallback Roboto Condensed 'RobotoCondensed' mapeado para uso por página
+2025-05-07 16:54:37,131 - Fallback Roboto Condensed 'RobotoCondensed-Bold' mapeado para uso por página
+2025-05-07 16:54:37,132 - Fallback Roboto Condensed 'RobotoCondensed-Italic' mapeado para uso por página
+2025-05-07 16:54:37,132 - Google Fonts API key presente: True
+2025-05-07 16:54:37,656 - Famílias do Google Fonts carregadas: 1696
+2025-05-07 16:54:37,656 - Famílias do Google Fonts para matching (case-insensitive): 1696
+2025-05-07 16:54:37,656 - Processando fonte PS 'AAAAAA+Roboto-Regular', embutida=F5
+2025-05-07 16:54:37,657 - Buscando similar para 'roboto' no Google Fonts (PS 'AAAAAA+Roboto-Regular')
+2025-05-07 16:54:37,657 - Match exato encontrado: 'Roboto' para PS 'AAAAAA+Roboto-Regular'
+2025-05-07 16:54:37,798 - Baixada variante 'Regular' da família 'Roboto' como 'Roboto'
+2025-05-07 16:54:37,949 - Baixada variante '-Bold' da família 'Roboto' como 'Roboto-Bold'
+2025-05-07 16:54:38,106 - Baixada variante '-Italic' da família 'Roboto' como 'Roboto-Italic'
+2025-05-07 16:54:38,106 - Fonte PS 'AAAAAA+Roboto-Regular' mapeada para variante 'Roboto'
+2025-05-07 16:54:38,106 - Processando fonte PS 'BAAAAA+OpenSans-Bold', embutida=F6
+2025-05-07 16:54:38,107 - Buscando similar para 'open sans' no Google Fonts (PS 'BAAAAA+OpenSans-Bold')
+2025-05-07 16:54:38,107 - Match exato encontrado: 'Open Sans' para PS 'BAAAAA+OpenSans-Bold'
+2025-05-07 16:54:38,249 - Baixada variante 'Regular' da família 'Open Sans' como 'OpenSans'
+2025-05-07 16:54:38,391 - Baixada variante '-Bold' da família 'Open Sans' como 'OpenSans-Bold'
+2025-05-07 16:54:38,556 - Baixada variante '-Italic' da família 'Open Sans' como 'OpenSans-Italic'
+2025-05-07 16:54:38,556 - Fonte PS 'BAAAAA+OpenSans-Bold' mapeada para variante 'OpenSans-Bold'
+2025-05-07 16:54:38,556 - Processando página 1/1
+2025-05-07 16:54:38,641 - Página 1: fallback full-page como imagem
+2025-05-07 16:54:38,644 - Página 1: inserindo 7 blocos de texto
+2025-05-07 16:54:41,311 - Página 1 processada com sucesso: 7 textos
+2025-05-07 16:57:31,587 - Carregando variáveis de ambiente (.env, .env.local e variáveis de sistema)
+2025-05-07 16:57:31,589 - DeepL API key presente: True
+2025-05-07 16:57:31,591 - Fonte local disponível: 'arial bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'arial bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Bold.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'arial italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'arial narrow bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'arial narrow bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Bold.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'arial narrow italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'arial narrow regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Narrow Regular.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'arial regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Arial Regular.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'calibri bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'calibri bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Bold.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'calibri italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'calibri light italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'calibri light' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Light.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'calibri regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Calibri Regular.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'cambria bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'cambria bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Bold.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'cambria italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'cambria math' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Cambria Math.ttc'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'segoe ui bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'segoe ui bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Bold.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'segoe ui italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Italic.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'segoe ui regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Segoe UI Regular.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'tahoma bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Bold.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'tahoma regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Tahoma Regular.ttf'
+2025-05-07 16:57:31,591 - Fonte local disponível: 'times new roman bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold Italic.ttf'
+2025-05-07 16:57:31,592 - Fonte local disponível: 'times new roman bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Bold.ttf'
+2025-05-07 16:57:31,592 - Fonte local disponível: 'times new roman italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Italic.ttf'
+2025-05-07 16:57:31,592 - Fonte local disponível: 'times new roman regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Times New Roman Regular.ttf'
+2025-05-07 16:57:31,592 - Fonte local disponível: 'verdana bold italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold Italic.ttf'
+2025-05-07 16:57:31,592 - Fonte local disponível: 'verdana bold' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Bold.ttf'
+2025-05-07 16:57:31,592 - Fonte local disponível: 'verdana italic' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Italic.ttf'
+2025-05-07 16:57:31,592 - Fonte local disponível: 'verdana regular' em 'C:\Users\timot\OneDrive\Documentos\Tradutor-PDF\fonts\Verdana Regular.ttf'
+2025-05-07 16:57:32,210 - Usando API do Google Fonts para Roboto Condensed
+2025-05-07 16:57:32,352 - Roboto Condensed estilo 'RobotoCondensed' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_x86298kv\RobotoCondensed.ttf'
+2025-05-07 16:57:32,496 - Roboto Condensed estilo 'RobotoCondensed-Bold' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_x86298kv\RobotoCondensed-Bold.ttf'
+2025-05-07 16:57:32,636 - Roboto Condensed estilo 'RobotoCondensed-Italic' disponível em 'C:\Users\timot\AppData\Local\Temp\fonts_x86298kv\RobotoCondensed-Italic.ttf'
+2025-05-07 16:57:32,637 - Fallback Roboto Condensed 'RobotoCondensed' mapeado para uso por página
+2025-05-07 16:57:32,637 - Fallback Roboto Condensed 'RobotoCondensed-Bold' mapeado para uso por página
+2025-05-07 16:57:32,637 - Fallback Roboto Condensed 'RobotoCondensed-Italic' mapeado para uso por página
+2025-05-07 16:57:32,637 - Google Fonts API key presente: True
+2025-05-07 16:57:33,216 - Famílias do Google Fonts carregadas: 1696
+2025-05-07 16:57:33,216 - Famílias do Google Fonts para matching (case-insensitive): 1696
+2025-05-07 16:57:33,216 - Processando fonte PS 'AAAAAA+Roboto-Regular', embutida=F6
+2025-05-07 16:57:33,217 - Buscando similar para 'roboto' no Google Fonts (PS 'AAAAAA+Roboto-Regular')
+2025-05-07 16:57:33,217 - Match exato encontrado: 'Roboto' para PS 'AAAAAA+Roboto-Regular'
+2025-05-07 16:57:33,361 - Baixada variante 'Regular' da família 'Roboto' como 'Roboto'
+2025-05-07 16:57:33,506 - Baixada variante '-Bold' da família 'Roboto' como 'Roboto-Bold'
+2025-05-07 16:57:33,659 - Baixada variante '-Italic' da família 'Roboto' como 'Roboto-Italic'
+2025-05-07 16:57:33,659 - Fonte PS 'AAAAAA+Roboto-Regular' mapeada para variante 'Roboto'
+2025-05-07 16:57:33,659 - Processando fonte PS 'BAAAAA+Roboto-Bold', embutida=F7
+2025-05-07 16:57:33,659 - Buscando similar para 'roboto' no Google Fonts (PS 'BAAAAA+Roboto-Bold')
+2025-05-07 16:57:33,659 - Match exato encontrado: 'Roboto' para PS 'BAAAAA+Roboto-Bold'
+2025-05-07 16:57:33,659 - Fonte PS 'BAAAAA+Roboto-Bold' mapeada para variante 'Roboto-Bold'
+2025-05-07 16:57:33,660 - Processando fonte PS 'CAAAAA+Roboto-Italic', embutida=F8
+2025-05-07 16:57:33,660 - Buscando similar para 'roboto' no Google Fonts (PS 'CAAAAA+Roboto-Italic')
+2025-05-07 16:57:33,660 - Match exato encontrado: 'Roboto' para PS 'CAAAAA+Roboto-Italic'
+2025-05-07 16:57:33,660 - Fonte PS 'CAAAAA+Roboto-Italic' mapeada para variante 'Roboto-Italic'
+2025-05-07 16:57:33,660 - Processando fonte PS 'DAAAAA+OpenSans-Bold', embutida=F9
+2025-05-07 16:57:33,660 - Buscando similar para 'open sans' no Google Fonts (PS 'DAAAAA+OpenSans-Bold')
+2025-05-07 16:57:33,660 - Match exato encontrado: 'Open Sans' para PS 'DAAAAA+OpenSans-Bold'
+2025-05-07 16:57:33,811 - Baixada variante 'Regular' da família 'Open Sans' como 'OpenSans'
+2025-05-07 16:57:33,954 - Baixada variante '-Bold' da família 'Open Sans' como 'OpenSans-Bold'
+2025-05-07 16:57:34,093 - Baixada variante '-Italic' da família 'Open Sans' como 'OpenSans-Italic'
+2025-05-07 16:57:34,093 - Fonte PS 'DAAAAA+OpenSans-Bold' mapeada para variante 'OpenSans-Bold'
+2025-05-07 16:57:34,094 - Processando página 1/1
+2025-05-07 16:57:34,179 - Página 1: inseriu imagem block bbox=(0.0, 0.0, 419.0, 595.0)
+2025-05-07 16:57:34,187 - Página 1: inserindo 6 blocos de texto
+2025-05-07 16:57:36,479 - Página 1 processada com sucesso: 6 textos
