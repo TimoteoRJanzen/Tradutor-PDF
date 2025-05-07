@@ -225,21 +225,47 @@ def main():
                     new_page.insert_font(fontfile=path, fontname=name)
                 except Exception:
                     pass
-        # Extrair e inserir imagens via get_images
-        images = page.get_images(full=True)
-        logger.info(f"Página {page_index}: encontrou {len(images)} imagens via get_images")
-        for img in images:
-            xref = img[0]
+        # Extrair blocos da página (texto e imagem)
+        page_dict = page.get_text('dict')
+        inserted = 0
+        # Inserir imagens diretamente a partir de blocos de imagem
+        for block in page_dict.get('blocks', []):
+            if block.get('type') == 1 and 'image' in block:
+                bbox = block['bbox']
+                img_val = block['image']
+                img_data = None
+                # o bloco pode fornecer bytes diretamente ou um dict com dados
+                if isinstance(img_val, (bytes, bytearray)):
+                    img_data = img_val
+                elif isinstance(img_val, dict):
+                    img_data = img_val.get('image') or img_val.get('image_bytes')
+                if img_data:
+                    try:
+                        new_page.insert_image(fitz.Rect(*bbox), stream=img_data)
+                        inserted += 1
+                        logger.info(f"Página {page_index}: inseriu imagem block bbox={bbox}")
+                    except Exception as e:
+                        logger.error(f"Página {page_index}: falha ao inserir imagem stream block bbox={bbox}: {e}")
+                else:
+                    logger.error(f"Página {page_index}: bloco de imagem sem dados stream bbox={bbox}")
+        # Fallback full-page se nenhuma imagem inserida
+        if inserted == 0:
             try:
-                bbox = page.get_image_bbox(xref)
-                # Extrair imagem como Pixmap e converter para RGB se necessário
-                pix = fitz.Pixmap(doc, xref)
-                if pix.alpha:  # remover canal alpha
-                    pix = fitz.Pixmap(fitz.csRGB, pix)
-                new_page.insert_image(fitz.Rect(*bbox), pixmap=pix)
-                logger.info(f"Página {page_index}: inseriu imagem xref={xref} bbox={bbox}")
+                # Fallback full-page em alta resolução para melhor qualidade
+                matrix = fitz.Matrix(2.0, 2.0)
+                page_pix = page.get_pixmap(matrix=matrix, alpha=False)
+                new_page.insert_image(
+                    fitz.Rect(0, 0, page.rect.width, page.rect.height),
+                    pixmap=page_pix
+                )
+                logger.info(f"Página {page_index}: fallback full-page como imagem")
+                # cobrir texto original para evitar mistura
+                for block in page_dict.get('blocks', []):
+                    if block.get('type') == 0:
+                        rect = fitz.Rect(block['bbox'])
+                        new_page.draw_rect(rect, color=(1,1,1), fill=(1,1,1))
             except Exception as e:
-                logger.error(f"Página {page_index}: falha ao inserir imagem xref={xref}: {e}")
+                logger.error(f"Página {page_index}: falha no fallback full-page: {e}")
         # Extrair spans de texto
         text_dict = page.get_text('dict')
         spans = []
@@ -273,7 +299,7 @@ def main():
             except Exception:
                 fallback = font_registry.get('default', 'Times-Roman')
                 new_page.insert_text((x, y), translated, fontsize=fontsize, fontname=fallback)
-        logger.info(f"Página {page_index} processada com sucesso: {len(images)} imagens, {len(spans)} textos")
+        logger.info(f"Página {page_index} processada com sucesso: {len(spans)} textos")
     # salva o PDF traduzido apenas com conteúdo reescrito
     new_doc.save(args.output)
     new_doc.close()

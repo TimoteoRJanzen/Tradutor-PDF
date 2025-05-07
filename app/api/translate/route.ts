@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
       const baseArgs = cmd === 'py'
         ? ['-3', scriptPath]
         : [scriptPath];
-      // adiciona flags de input, output e idioma
+      // Montar argumentos para o script Python
       const args = [
         ...baseArgs,
         '--input', inputPath,
