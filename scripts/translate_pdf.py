@@ -374,6 +374,39 @@ def main():
 
         blocks = group_spans(spans)
         for block in blocks:
+            # Detectar alinhamento original do bloco
+            bx0, by0, bx1, by1 = block['bbox']
+            # Agrupar spans em linhas com base na coordenada Y
+            line_clusters = []
+            for span in block['spans']:
+                y = span['origin'][1]
+                placed = False
+                for lc in line_clusters:
+                    if abs(y - lc['y']) <= 1.0:
+                        lc['spans'].append(span)
+                        placed = True
+                        break
+                if not placed:
+                    line_clusters.append({'y': y, 'spans': [span]})
+            # Contar alinhamentos por linha
+            counts = {'left': 0, 'right': 0, 'center': 0, 'justify': 0}
+            threshold = 5.0
+            for lc in line_clusters:
+                x0_line = min(s['origin'][0] for s in lc['spans'])
+                x1_line = max(s['origin'][0] + (s['bbox'][2] - s['bbox'][0]) for s in lc['spans'])
+                offset_left = x0_line - bx0
+                offset_right = bx1 - x1_line
+                if offset_left <= threshold and offset_right > threshold:
+                    counts['left'] += 1
+                elif offset_left > threshold and offset_right <= threshold:
+                    counts['right'] += 1
+                elif offset_left <= threshold and offset_right <= threshold:
+                    counts['justify'] += 1
+                elif abs(offset_left - offset_right) <= threshold:
+                    counts['center'] += 1
+                else:
+                    counts['left'] += 1
+            block['alignment'] = max(counts, key=lambda k: counts[k])
             # Ordenar spans por posição na página: primeiro Y (topo), depois X (esquerda)
             sorted_spans = sorted(block['spans'], key=lambda s: (s['origin'][1], s['origin'][0]))
             marked_text = ''
@@ -504,7 +537,31 @@ def main():
             y = by0 + max((block_height - total_height) / 2, 0)
             for line in lines:
                 line_width = sum(measure(seg['text'], seg['fontname'], fontsize) for seg in line)
-                x = bx0 + (block_width - line_width) / 2
+                # Ajustar posição X de acordo com alinhamento original
+                align = block.get('alignment', 'left')
+                if align == 'left':
+                    x = bx0
+                elif align == 'right':
+                    x = bx0 + block_width - line_width
+                elif align == 'center':
+                    x = bx0 + (block_width - line_width) / 2
+                elif align == 'justify' and line != lines[-1]:
+                    # Distribuir espaço extra entre espaços
+                    num_spaces = sum(1 for seg in line if seg['text'].endswith(' '))
+                    extra_total = block_width - line_width
+                    extra_per = extra_total / num_spaces if num_spaces > 0 else 0
+                    x = bx0
+                    for seg in line:
+                        try:
+                            new_page.insert_text((x, y), seg['text'], fontsize=fontsize, fontname=seg['fontname'])
+                        except Exception:
+                            new_page.insert_text((x, y), seg['text'], fontsize=fontsize, fontname=font_registry.get('default'))
+                        w = measure(seg['text'], seg['fontname'], fontsize)
+                        x += w + (extra_per if seg['text'].endswith(' ') else 0)
+                    y += fontsize * line_spacing
+                    continue
+                else:
+                    x = bx0 + (block_width - line_width) / 2
                 for seg in line:
                     try:
                         new_page.insert_text((x, y), seg['text'], fontsize=fontsize, fontname=seg['fontname'])
