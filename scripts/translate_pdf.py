@@ -357,7 +357,14 @@ def main():
 
         def get_font_for_style(base_raw, style):
             if style == 'normal':
-                return font_registry.get(base_raw, font_registry.get('default'))
+                # Tentar usar mapeamento direto; se base_raw não encontrado, remover sufixo 'Regular'
+                if base_raw in font_registry:
+                    return font_registry[base_raw]
+                # remover sufixos '-Regular' ou ' Regular' e tentar novamente
+                cleaned_raw = re.sub(r'(?i)(?:[- ]?Regular)$', '', base_raw)
+                if cleaned_raw in font_registry:
+                    return font_registry[cleaned_raw]
+                return font_registry.get('default')
             elif style == 'bold':
                 candidate = base_raw.replace('Regular', '').rstrip('-') + '-Bold'
                 return font_registry.get(candidate, font_registry.get('default_bold'))
