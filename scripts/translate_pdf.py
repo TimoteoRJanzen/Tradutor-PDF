@@ -11,6 +11,7 @@ import sys
 import difflib
 import re
 import html
+import pikepdf
 try:
     from dotenv import load_dotenv
     # Carrega .env e .env.local para fazer override de variáveis
@@ -82,9 +83,13 @@ def main():
     else:
         local_fonts_map = {}
 
-    # Abre o documento original e cria novo documento vazio
+    # Gera PDF intermediário sem texto
+    pdf_sem_texto = os.path.join(tmp_dir, "no_text.pdf")
+    strip_text_from_pdf(args.input, pdf_sem_texto)
     doc = fitz.open(args.input)
+    clean_doc = fitz.open(pdf_sem_texto)
     new_doc = fitz.open()
+
     # Extrai e registra fontes do documento
     font_info_map = {}
     for page_font in doc:
@@ -266,6 +271,8 @@ def main():
         logger.info(f"Processando página {page_index}/{len(doc)}")
         # criar nova página com mesmas dimensões
         new_page = new_doc.new_page(width=page.rect.width, height=page.rect.height)
+        # Importa fundo vetorial limpo da página intermediária
+        new_page.show_pdf_page(new_page.rect, clean_doc, page_index-1)
         # Registrar fontes customizadas nesta página
         for name, path in file_registry.items():
             if path and os.path.exists(path):
@@ -273,47 +280,6 @@ def main():
                     new_page.insert_font(fontfile=path, fontname=name)
                 except Exception:
                     pass
-        # Extrair blocos da página (texto e imagem)
-        page_dict = page.get_text('dict')
-        inserted = 0
-        # Inserir imagens diretamente a partir de blocos de imagem
-        for block in page_dict.get('blocks', []):
-            if block.get('type') == 1 and 'image' in block:
-                bbox = block['bbox']
-                img_val = block['image']
-                img_data = None
-                # o bloco pode fornecer bytes diretamente ou um dict com dados
-                if isinstance(img_val, (bytes, bytearray)):
-                    img_data = img_val
-                elif isinstance(img_val, dict):
-                    img_data = img_val.get('image') or img_val.get('image_bytes')
-                if img_data:
-                    try:
-                        new_page.insert_image(fitz.Rect(*bbox), stream=img_data)
-                        inserted += 1
-                        logger.info(f"Página {page_index}: inseriu imagem block bbox={bbox}")
-                    except Exception as e:
-                        logger.error(f"Página {page_index}: falha ao inserir imagem stream block bbox={bbox}: {e}")
-                else:
-                    logger.error(f"Página {page_index}: bloco de imagem sem dados stream bbox={bbox}")
-        # Fallback full-page se nenhuma imagem inserida
-        if True:
-            try:
-                # Fallback full-page em alta resolução para melhor qualidade
-                matrix = fitz.Matrix(2.0, 2.0)
-                page_pix = page.get_pixmap(matrix=matrix, alpha=False)
-                new_page.insert_image(
-                    fitz.Rect(0, 0, page.rect.width, page.rect.height),
-                    pixmap=page_pix
-                )
-                logger.info(f"Página {page_index}: fallback full-page como imagem")
-                # cobrir texto original para evitar mistura
-                for block in page_dict.get('blocks', []):
-                    if block.get('type') == 0:
-                        rect = fitz.Rect(block['bbox'])
-                        new_page.draw_rect(rect, color=(1,1,1), fill=(1,1,1))
-            except Exception as e:
-                logger.error(f"Página {page_index}: falha no fallback full-page: {e}")
         # Extrair spans de texto
         text_dict = page.get_text('dict')
         spans = []
@@ -581,7 +547,7 @@ def main():
     new_doc.save(args.output)
     new_doc.close()
     doc.close()
-    # Limpa diretório temporário de fontes
+    clean_doc.close()
     shutil.rmtree(tmp_dir)
 
 def download_and_prepare_roboto_condensed_fonts(tmp_dir, logger=None):
@@ -635,6 +601,46 @@ def download_and_prepare_roboto_condensed_fonts(tmp_dir, logger=None):
             logger.error(f"Falha ao baixar Roboto Condensed {style}: {e}")
             font_paths[style] = None
     return font_paths
+
+def strip_text_from_pdf(input_path: str, output_path: str):
+    """Remove operadores de texto (BT...ET) de todas as páginas e Form XObjects (recursivo), mantendo gráficos e imagens."""
+    pdf = pikepdf.open(input_path)
+
+    def remove_text_from_stream(obj, pdf, processed=None):
+        if processed is None:
+            processed = set()
+        # Evita loops infinitos em XObjects recursivos
+        obj_id = id(obj)
+        if obj_id in processed:
+            return obj.get("/Contents", None)
+        processed.add(obj_id)
+        cs = pikepdf.parse_content_stream(obj)
+        remove_ranges = []
+        stack = []
+        for idx, (operands, op) in enumerate(cs):
+            if op == pikepdf.Operator("BT"):
+                stack.append(idx)
+            elif op == pikepdf.Operator("ET") and stack:
+                start = stack.pop()
+                remove_ranges.append((start, idx + 1))
+        for start, end in reversed(remove_ranges):
+            del cs[start:end]
+        # Processa recursivamente XObjects do tipo Form
+        resources = obj.get("/Resources", {})
+        xobjects = resources.get("/XObject", {})
+        for name, xobj in xobjects.items():
+            try:
+                subtype = xobj.get("/Subtype", None)
+                if subtype and str(subtype) == "/Form":
+                    xobj["/Contents"] = remove_text_from_stream(xobj, pdf, processed)
+            except Exception:
+                continue
+        return pdf.make_stream(pikepdf.unparse_content_stream(cs))
+
+    for page in pdf.pages:
+        # Remove texto da página e de todos os XObjects recursivamente
+        page.Contents = remove_text_from_stream(page, pdf)
+    pdf.save(output_path)
 
 if __name__ == '__main__':
     main() 
