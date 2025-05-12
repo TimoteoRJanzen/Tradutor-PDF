@@ -75,7 +75,7 @@ def main():
     if os.path.isdir(local_fonts_dir):
         for fname in os.listdir(local_fonts_dir):
             if fname.lower().endswith(('.ttf', '.otf', '.ttc')):
-                reg_name = os.path.splitext(fname)[0].lower()
+                reg_name = os.path.splitext(fname)[0]  # Usa o nome do arquivo sem extensão, sensível a maiúsculas/minúsculas
                 path = os.path.join(local_fonts_dir, fname)
                 local_fonts_map[reg_name] = path
                 file_registry[reg_name] = path
@@ -160,7 +160,7 @@ def main():
             if ps_name.lower().endswith('psmt'):
                 base = re.sub(r'psmt$', '', ps_name, flags=re.IGNORECASE)
                 base_words = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', base)
-                key = f"{base_words.strip().lower()} regular"
+                key = f"{base_words.strip()}Regular".replace(' ', '')  # Ex: TimesNewRomanRegular
                 if key in local_fonts_map:
                     font_path = local_fonts_map[key]
                     file_registry[ps_name] = font_path
@@ -168,10 +168,9 @@ def main():
                     fonte_registrada = True
                     logger.info(f"Fonte local PSMT '{key}' mapeada para PS '{ps_name}' via '{font_path}'")
             if not fonte_registrada:
-                normalized_ps = re.sub(r'[^A-Za-z]', '', ps_name).lower()
+                normalized_ps = re.sub(r'[^A-Za-z]', '', ps_name)
                 local_keys = list(local_fonts_map.keys())
-                # Match exato por substring
-                matches = [name for name in local_keys if name in normalized_ps]
+                matches = [name for name in local_keys if name.lower() in normalized_ps.lower()]
                 if matches:
                     chosen = max(matches, key=len)
                     font_path = local_fonts_map[chosen]
@@ -266,6 +265,9 @@ def main():
                 font_registry[ps_name] = font_registry['default']
             logger.info(f"Fallback: fonte para PS '{ps_name}' definida como '{font_registry[ps_name]}'")
 
+    # Determinar quais fontes realmente serão usadas neste PDF
+    fontes_usadas = set(file_registry.keys())  # Apenas as fontes mapeadas para algum ps_name
+
     # Percorrer páginas do documento original e gerar no novo
     for page_index, page in enumerate(doc, start=1):
         logger.info(f"Processando página {page_index}/{len(doc)}")
@@ -273,13 +275,15 @@ def main():
         new_page = new_doc.new_page(width=page.rect.width, height=page.rect.height)
         # Importa fundo vetorial limpo da página intermediária
         new_page.show_pdf_page(new_page.rect, clean_doc, page_index-1)
-        # Registrar fontes customizadas nesta página
-        for name, path in file_registry.items():
+        # Registrar apenas as fontes necessárias nesta página
+        for name in fontes_usadas:
+            path = file_registry.get(name)
             if path and os.path.exists(path):
                 try:
                     new_page.insert_font(fontfile=path, fontname=name)
-                except Exception:
-                    pass
+                    logger.info(f"Fonte '{name}' registrada na página usando '{path}'")
+                except Exception as e:
+                    logger.error(f"Erro ao registrar fonte '{name}' na página: {e}")
         # Extrair spans de texto
         text_dict = page.get_text('dict')
         spans = []
@@ -323,22 +327,29 @@ def main():
 
         def get_font_for_style(base_raw, style):
             if style == 'normal':
-                # Tentar usar mapeamento direto; se base_raw não encontrado, remover sufixo 'Regular'
                 if base_raw in font_registry:
                     return font_registry[base_raw]
-                # remover sufixos '-Regular' ou ' Regular' e tentar novamente
                 cleaned_raw = re.sub(r'(?i)(?:[- ]?Regular)$', '', base_raw)
                 if cleaned_raw in font_registry:
                     return font_registry[cleaned_raw]
                 return font_registry.get('default')
             elif style == 'bold':
-                candidate = base_raw.replace('Regular', '').rstrip('-') + '-Bold'
+                if 'Bold' in base_raw:
+                    candidate = base_raw
+                else:
+                    candidate = base_raw.replace('Regular', '').rstrip('-') + '-Bold'
                 return font_registry.get(candidate, font_registry.get('default_bold'))
             elif style == 'italic':
-                candidate = base_raw.replace('Regular', '').rstrip('-') + '-Italic'
+                if 'Italic' in base_raw or 'Oblique' in base_raw:
+                    candidate = base_raw
+                else:
+                    candidate = base_raw.replace('Regular', '').rstrip('-') + '-Italic'
                 return font_registry.get(candidate, font_registry.get('default_italic'))
             else:
-                candidate = base_raw.replace('Regular', '').rstrip('-') + '-BoldItalic'
+                if ('Bold' in base_raw and ('Italic' in base_raw or 'Oblique' in base_raw)):
+                    candidate = base_raw
+                else:
+                    candidate = base_raw.replace('Regular', '').rstrip('-') + '-BoldItalic'
                 if candidate in font_registry:
                     return font_registry[candidate]
                 if font_registry.get('default_bold'):
@@ -527,7 +538,8 @@ def main():
                     for seg in line:
                         try:
                             new_page.insert_text((x, y), seg['text'], fontsize=fontsize, fontname=seg['fontname'])
-                        except Exception:
+                        except Exception as e:
+                            logger.error(f"Erro ao inserir texto com fonte '{seg['fontname']}': {e}. Usando fallback.")
                             new_page.insert_text((x, y), seg['text'], fontsize=fontsize, fontname=font_registry.get('default'))
                         w = measure(seg['text'], seg['fontname'], fontsize)
                         x += w + (extra_per if seg['text'].endswith(' ') else 0)
@@ -538,7 +550,8 @@ def main():
                 for seg in line:
                     try:
                         new_page.insert_text((x, y), seg['text'], fontsize=fontsize, fontname=seg['fontname'])
-                    except Exception:
+                    except Exception as e:
+                        logger.error(f"Erro ao inserir texto com fonte '{seg['fontname']}': {e}. Usando fallback.")
                         new_page.insert_text((x, y), seg['text'], fontsize=fontsize, fontname=font_registry.get('default'))
                     x += measure(seg['text'], seg['fontname'], fontsize)
                 y += fontsize * line_spacing
