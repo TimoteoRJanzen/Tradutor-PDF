@@ -78,7 +78,6 @@ def main():
                 reg_name = os.path.splitext(fname)[0]  # Usa o nome do arquivo sem extensão, sensível a maiúsculas/minúsculas
                 path = os.path.join(local_fonts_dir, fname)
                 local_fonts_map[reg_name] = path
-                file_registry[reg_name] = path
                 logger.info(f"Fonte local disponível: '{reg_name}' em '{path}'")
     else:
         local_fonts_map = {}
@@ -139,19 +138,20 @@ def main():
     for ps_name, (xref, is_embedded) in font_info_map.items():
         logger.info(f"Processando fonte PS '{ps_name}', embutida={is_embedded}")
         fonte_registrada = False
-        # 1) Tentar extrair e registrar fonte embutida (se existir)
+        # 1) Tentar extrair e registrar fonte embutida (prioridade máxima)
         try:
             info = doc.extract_font(xref)
             if isinstance(info, dict):
                 font_data = info.get('fontfile') or info.get('file')
+                ext = info.get('ext', 'ttf')  # PyMuPDF pode retornar 'ext' (ttf, otf, etc)
                 if font_data:
-                    font_path = os.path.join(tmp_dir, f"{ps_name}.ttf")
+                    font_path = os.path.join(tmp_dir, f"{ps_name}.{ext}")
                     with open(font_path, 'wb') as f:
                         f.write(font_data)
-                    font_registry[ps_name] = ps_name
+                    font_registry[ps_name] = ps_name  # Usa o mesmo nome do PDF
                     file_registry[ps_name] = font_path
                     fonte_registrada = True
-                    logger.info(f"Fonte embutida '{ps_name}' mapeada para uso por página")
+                    logger.info(f"Fonte embutida '{ps_name}' extraída e registrada em '{font_path}' (prioridade máxima)")
         except Exception as e:
             logger.debug(f"Não é fonte embutida ou falhou extração de '{ps_name}': {e}")
         # 2) Se não registrado, tentar match em fontes locais (exato + fuzzy)
@@ -192,7 +192,7 @@ def main():
             # Extrair a parte após '+' no PS name (ex: 'OpenSans-Bold')
             name_part = ps_name.split('+')[-1]
             # Remover sufixos de estilo (Bold, Italic, Regular, Oblique)
-            base_part = re.sub(r'[- ]?(Bold|Italic|Regular|Oblique).*$', '', name_part, flags=re.IGNORECASE)
+            base_part = re.sub(r'[- ]?(Bold|Italic|Regular|Oblique).*$','', name_part, flags=re.IGNORECASE)
             # Separar CamelCase e normalizar
             base_part = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', base_part)
             family_search = base_part.replace('-', ' ').strip().lower()
