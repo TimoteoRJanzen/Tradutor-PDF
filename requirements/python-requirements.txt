@@ -3,4 +3,5 @@ reportlab
 deepl
 PyMuPDF
 requests
-Pillow 
+Pillow
+pikepdf 

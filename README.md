@@ -1,6 +1,6 @@
 # Tradutor de PDF
 
-Uma aplicação para traduzir arquivos PDF do inglês para o português (ou outros idiomas) usando a API do DeepL, mantendo o layout e as fontes o mais próximo possível do original.
+Uma aplicação para traduzir arquivos PDF do inglês para o português (ou outros idiomas) usando a API do DeepL, mantendo o layout, imagens e as fontes o mais próximo possível do original.
 
 > **Nota**: Este é um projeto teste desenvolvido como parte do meu processo de aprendizagem em desenvolvimento de aplicações web com Inteligência Artificial. O objetivo é explorar e praticar a integração de diferentes tecnologias e APIs em um contexto real.
 
@@ -15,15 +15,29 @@ Uma aplicação para traduzir arquivos PDF do inglês para o português (ou outr
 - Suporte a fontes customizadas: basta adicionar arquivos `.ttf`, `.otf` ou `.ttc` na pasta `fonts/`
 - Fallback automático para fontes padrão se a original não estiver disponível
 - Log detalhado do processo em `translate_pdf.log`
+- Manipulação avançada de PDF: remoção de texto preservando gráficos e imagens (usando pikepdf)
+- Download automático de fontes do Google Fonts (se configurado)
+- Suporte a variáveis de ambiente via `.env` e `.env.local` (usando python-dotenv)
 
 ## Tecnologias Utilizadas
 
-- Next.js 15, React 19, TypeScript (interface web)
-- Python 3.8+ (backend/script)
-- PyMuPDF (fitz), deepl, requests, Pillow, pdfplumber, reportlab
-- DeepL API
-- Google Fonts API (opcional)
-- Tailwind CSS, Shadcn/ui
+- **Frontend:** Next.js 15, React 19, TypeScript, Tailwind CSS, Shadcn/ui
+- **Backend/script:** Python 3.8+
+- **Principais bibliotecas Python:**
+  - PyMuPDF (fitz)
+  - deepl
+  - requests
+  - Pillow
+  - pdfplumber
+  - reportlab
+  - pikepdf
+  - python-dotenv (opcional, recomendado para uso de .env)
+- **APIs:**
+  - DeepL API
+  - Google Fonts API (opcional)
+- **Outros:**
+  - Logging detalhado em arquivo e console
+  - Suporte a fontes customizadas via pasta `fonts/`
 
 ## Instalação
 
@@ -49,7 +63,7 @@ No Windows:
 py -3 -m pip install -r requirements/python-requirements.txt
 ```
 
-4. (Opcional) Adicione fontes customizadas na pasta `fonts/` para melhor correspondência de layout.
+4. (Opcional) Adicione fontes customizadas na pasta `fonts/` para melhor correspondência de layout. O script tentará usar fontes embutidas, locais, Google Fonts ou Roboto Condensed como fallback.
 
 5. Crie um arquivo `.env.local` na raiz do projeto e defina as variáveis:
 ```env
@@ -67,7 +81,7 @@ python scripts/translate_pdf.py --input caminho/arquivo.pdf --output caminho/arq
 - `--output`: caminho para salvar o PDF traduzido
 - `--target_lang`: idioma de destino (ex: PT-BR, ES, FR, etc)
 
-O script tentará manter o layout, imagens e fontes o mais próximo possível do original. Se necessário, baixe fontes do Google Fonts ou use Roboto Condensed como fallback.
+O script tentará manter o layout, imagens e fontes o mais próximo possível do original. Se necessário, baixará fontes do Google Fonts ou usará Roboto Condensed como fallback. O log detalhado do processo é salvo em `translate_pdf.log`.
 
 ## Variáveis de Ambiente
 - `DEEPL_API_KEY` (**obrigatória**): chave da API DeepL para tradução
@@ -77,6 +91,8 @@ O script tentará manter o layout, imagens e fontes o mais próximo possível do
 - Para melhor qualidade visual, adicione fontes usadas nos PDFs na pasta `fonts/`.
 - O log detalhado do processo é salvo em `translate_pdf.log`.
 - O projeto pode ser executado tanto via interface web quanto via linha de comando Python.
+- O script faz uso de pikepdf para manipulação avançada do PDF (remoção de texto mantendo gráficos/vetores).
+- O uso de python-dotenv é recomendado para facilitar o gerenciamento de variáveis de ambiente, mas o script funciona mesmo sem ele (desde que as variáveis estejam definidas no ambiente).
 
 ## Dependências Python
 - pdfplumber
@@ -85,8 +101,7 @@ O script tentará manter o layout, imagens e fontes o mais próximo possível do
 - PyMuPDF
 - requests
 - Pillow
-- python-dotenv (opcional, recomendado para uso de .env)
+- pikepdf
+- python-dotenv (opcional)
 
 ---
-
-Contribuições e sugestões são bem-vindas!
