@@ -98,6 +98,11 @@ def main():
             is_embedded = font[4] if len(font) > 4 else False
             if ps_name not in font_info_map:
                 font_info_map[ps_name] = (xref, is_embedded)
+    # Loga todas as fontes encontradas no PDF original
+    logger.info("=== FONTES ENCONTRADAS NO PDF ORIGINAL ===")
+    for ps_name, (xref, is_embedded) in font_info_map.items():
+        logger.info(f"Fonte: '{ps_name}' | xref: {xref} | embutida: {is_embedded}")
+    logger.info("=== FIM DA LISTA DE FONTES ORIGINAIS ===")
 
     # Baixar e preparar Roboto Condensed como fonte fallback
     roboto_font_paths = download_and_prepare_roboto_condensed_fonts(tmp_dir, logger)
@@ -151,9 +156,13 @@ def main():
                     font_registry[ps_name] = ps_name  # Usa o mesmo nome do PDF
                     file_registry[ps_name] = font_path
                     fonte_registrada = True
-                    logger.info(f"Fonte embutida '{ps_name}' extraída e registrada em '{font_path}' (prioridade máxima)")
+                    logger.info(f"[EXTRAÇÃO] Fonte embutida extraída: '{ps_name}' | xref: {xref} | arquivo: {font_path}")
+                else:
+                    logger.warning(f"[EXTRAÇÃO] Fonte embutida '{ps_name}' encontrada mas sem dados de arquivo extraível.")
+            else:
+                logger.warning(f"[EXTRAÇÃO] Fonte '{ps_name}' não retornou dict ao tentar extrair.")
         except Exception as e:
-            logger.debug(f"Não é fonte embutida ou falhou extração de '{ps_name}': {e}")
+            logger.warning(f"[EXTRAÇÃO] Falha ao extrair fonte embutida '{ps_name}': {e}. Será tentado fallback.")
         # 2) Se não registrado, tentar match em fontes locais (exato + fuzzy)
         if not fonte_registrada:
             # 2a) PS suffix PSMT → mapear para Regular local
@@ -518,7 +527,8 @@ def main():
                     lines = wrap_segments(fontsize)
             # centralizar verticalmente
             total_height = len(lines) * fontsize * line_spacing
-            y = by0 + max((block_height - total_height) / 2, 0)
+            #y = by0 #+ max((block_height - total_height) / 2, 0)
+            y = sorted_spans[0]['origin'][1]
             for line in lines:
                 line_width = sum(measure(seg['text'], seg['fontname'], fontsize) for seg in line)
                 # Ajustar posição X de acordo com alinhamento original
