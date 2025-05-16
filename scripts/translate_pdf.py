@@ -14,6 +14,7 @@ import html
 import pikepdf
 from typing import Optional
 import struct
+import xml.etree.ElementTree as ET
 try:
     from dotenv import load_dotenv
     # Carrega .env e .env.local para fazer override de variáveis
@@ -595,6 +596,7 @@ def main():
             block['alignment'] = max(counts, key=lambda k: counts[k])
             # Ordenar spans por posição na página: primeiro Y (topo), depois X (esquerda)
             sorted_spans = sorted(block['spans'], key=lambda s: (s['origin'][1], s['origin'][0]))
+            logger.info(f"[DEBUG][ORIGINAL] Spans agrupados para bloco: {[{'text': s['text'], 'font': s['font'], 'size': s['size']} for s in sorted_spans]}")
             marked_text = ''
             for span in sorted_spans:
                 text = span['text'].strip()
@@ -612,6 +614,7 @@ def main():
                 if marked_text and not marked_text.endswith(' ') and not piece.startswith(' '):
                     marked_text += ' '
                 marked_text += piece
+            logger.info(f"[DEBUG][ORIGINAL] Texto marcado com tags XML para tradução: {marked_text}")
             # Traduzir texto preservando tags XML, mas sem ignorar conteúdo de <b> e <i>
             result = translator.translate_text(
                 marked_text,
@@ -621,29 +624,47 @@ def main():
                 preserve_formatting=True
             )
             translated_xml = result.text
-            # Extrair segmentos preservando tags XML <b> e <i>
-            pattern = r'(<b><i>.*?</i></b>|<b>.*?</b>|<i>.*?</i>)'
-            segments = []
-            last_end = 0
-            for m in re.finditer(pattern, translated_xml):
-                # texto antes da tag
-                pre = translated_xml[last_end:m.start()]
-                if pre:
-                    segments.append({'text': html.unescape(pre), 'style': 'normal'})
-                grp = m.group(0)
-                if grp.startswith('<b><i>'):
-                    content = grp[7:-7]; style = 'bolditalic'
-                elif grp.startswith('<b>'):
-                    content = grp[3:-4]; style = 'bold'
-                else:
-                    content = grp[3:-4]; style = 'italic'
-                segments.append({'text': content, 'style': style})
-                last_end = m.end()
-            # texto após última tag
-            if last_end < len(translated_xml):
-                tail = translated_xml[last_end:]
-                if tail:
-                    segments.append({'text': html.unescape(tail), 'style': 'normal'})
+            logger.info(f"[DEBUG] Texto traduzido com tags: {translated_xml}")
+            # Extrair segmentos preservando tags XML <b> e <i> usando ElementTree
+            def extrair_segmentos_xml(texto_xml):
+                try:
+                    root = ET.fromstring(f'<root>{texto_xml}</root>')
+                except Exception as e:
+                    logger.error(f"[XML] Erro ao parsear XML: {e}\nTexto: {texto_xml}")
+                    return [{'text': texto_xml, 'style': 'normal'}]
+                segmentos = []
+                def walk(node, estilos=None):
+                    estilos = estilos or set()
+                    for elem in node:
+                        local_estilos = estilos.copy()
+                        if elem.tag == 'b':
+                            local_estilos.add('bold')
+                        if elem.tag == 'i':
+                            local_estilos.add('italic')
+                        if list(elem):
+                            walk(elem, local_estilos)
+                        else:
+                            style = 'normal'
+                            if 'bold' in local_estilos and 'italic' in local_estilos:
+                                style = 'bolditalic'
+                            elif 'bold' in local_estilos:
+                                style = 'bold'
+                            elif 'italic' in local_estilos:
+                                style = 'italic'
+                            txt = (elem.text or '')
+                            if txt.strip():
+                                segmentos.append({'text': txt, 'style': style})
+                        if elem.tail and elem.tail.strip():
+                            # tail sempre é normal
+                            segmentos.append({'text': elem.tail, 'style': 'normal'})
+                if root.text and root.text.strip():
+                    segmentos.append({'text': root.text, 'style': 'normal'})
+                walk(root)
+                return segmentos
+            segments = extrair_segmentos_xml(translated_xml)
+            logger.info(f"[DEBUG] Segmentos extraídos: {segments}")
+            for idx, seg in enumerate(segments):
+                logger.info(f"[DEBUG][SEGMENTO] idx={idx} texto='{seg['text']}' estilo={seg['style']}")
             bx0, by0, bx1, by1 = block['bbox']
             block_width = bx1 - bx0
             block_height = by1 - by0
@@ -666,8 +687,20 @@ def main():
             fontsize = original_size
             line_spacing = 1.2
             # 1) testar sem quebra: medir largura total
-            full_width = sum(measure(seg['text'], get_font_for_style(sorted_spans[0]['font'], seg['style']), fontsize)
-                              for seg in segments)
+            # --- NOVO: Montar texto concatenado com espaçamento correto ---
+            def join_segments_with_space(segments):
+                result = ''
+                for i, seg in enumerate(segments):
+                    txt = seg['text']
+                    if i > 0:
+                        prev = segments[i-1]['text']
+                        # Se o anterior não termina com espaço e o atual não começa com espaço, adiciona espaço
+                        if not prev.endswith(' ') and not txt.startswith(' '):
+                            result += ' '
+                    result += txt
+                return result
+            full_text = join_segments_with_space(segments)
+            full_width = measure(full_text, get_font_for_style(sorted_spans[0]['font'], segments[0]['style']), fontsize)
             # Calcular número de linhas originais
             original_lines = len(line_clusters)
             def ajustar_titulo_para_linhas(lines, fontsize, block_width, original_lines, min_fontsize=10):
@@ -680,28 +713,47 @@ def main():
             if full_width <= block_width:
                 # sem quebra; usar segmentos originais com fontname
                 base_font = sorted_spans[0]['font']
-                lines = [[
-                    {'text': seg['text'], 'style': seg['style'], 'fontname': get_font_for_style(base_font, seg['style'])}
-                    for seg in segments
-                ]]
+                # --- AJUSTE: Concatenar espaço ao texto do próximo segmento, mantendo a fonte ---
+                line = []
+                i = 0
+                while i < len(segments):
+                    txt = segments[i]['text']
+                    style = segments[i]['style']
+                    fontname = get_font_for_style(base_font, style)
+                    # Se não é o primeiro segmento, verificar se precisa adicionar espaço ao início
+                    if i > 0:
+                        prev_txt = segments[i-1]['text']
+                        if not prev_txt.endswith(' ') and not txt.startswith(' '):
+                            txt = ' ' + txt
+                    line.append({'text': txt, 'style': style, 'fontname': fontname})
+                    i += 1
+                lines = [line]
             else:
                 # 2) tentar reduzir fonte até 20%
                 min_size = original_size * 0.9
                 size_shrink = fontsize
                 while size_shrink > min_size:
                     size_shrink *= 0.95
-                    full_width = sum(measure(seg['text'], get_font_for_style(sorted_spans[0]['font'], seg['style']), size_shrink)
-                                      for seg in segments)
+                    full_text = join_segments_with_space(segments)
+                    full_width = measure(full_text, get_font_for_style(sorted_spans[0]['font'], segments[0]['style']), size_shrink)
                     if full_width <= block_width:
                         break
                 if full_width <= block_width:
                     fontsize = size_shrink
-                    # sem quebra após shrink; manter spans originais com novo tamanho
                     base_font = sorted_spans[0]['font']
-                    lines = [[
-                        {'text': seg['text'], 'style': seg['style'], 'fontname': get_font_for_style(base_font, seg['style'])}
-                        for seg in segments
-                    ]]
+                    line = []
+                    i = 0
+                    while i < len(segments):
+                        txt = segments[i]['text']
+                        style = segments[i]['style']
+                        fontname = get_font_for_style(base_font, style)
+                        if i > 0:
+                            prev_txt = segments[i-1]['text']
+                            if not prev_txt.endswith(' ') and not txt.startswith(' '):
+                                txt = ' ' + txt
+                        line.append({'text': txt, 'style': style, 'fontname': fontname})
+                        i += 1
+                    lines = [line]
                 else:
                     # 3) fallback: voltar ao tamanho original e quebrar linhas
                     fontsize = original_size
@@ -709,12 +761,16 @@ def main():
                         lines_tmp = []
                         current_line = []
                         current_width = 0
-                        for seg in segments:
+                        for i, seg in enumerate(segments):
                             words = seg['text'].split(' ')
-                            for i, word in enumerate(words):
-                                txt = word + (' ' if i < len(words)-1 else '')
+                            for j, word in enumerate(words):
+                                txt = word + (' ' if j < len(words)-1 else '')
                                 style = seg['style']
                                 fontname = get_font_for_style(sorted_spans[0]['font'], style)
+                                if i > 0 and j == 0:
+                                    prev = segments[i-1]['text']
+                                    if not prev.endswith(' ') and not txt.startswith(' '):
+                                        txt = ' ' + txt
                                 w = measure(txt, fontname, fs)
                                 if current_width + w <= block_width or not current_line:
                                     current_line.append({'text': txt, 'style': style, 'fontname': fontname})
